@@ -1,0 +1,49 @@
+1
+
+ SELECT contract.id, employees.name
+FROM employees
+JOIN contract ON employees.id = contract.customer_id
+JOIN department ON employees.department_id = department.id
+WHERE department.name = 'Logistic';
+
+ 
+2
+
+SELECT AVG (amount) AS Avg_Amount FROM contract
+JOIN  employees ON contract.customer_id = employees.id
+WHERE employees.name = 'Ivan Ivanov'
+
+
+3
+ SELECT location, COUNT (location) AS Frequency FROM Customer
+ GROUP BY location
+ ORDER BY frequency
+ DESC
+ LIMIT 1
+
+
+4
+ SELECT amount, count (*) FROM contract
+ GROUP BY amount
+ HAVING count (*) > 1
+
+
+5
+ SELECT customer.customer_name, AVG(contract.amount) AS average_amount
+FROM customer
+JOIN contract ON customer.id = contract.customer_id
+GROUP BY customer.id, customer.customer_name
+ORDER BY average_amount
+LIMIT 1;
+
+
+6
+ SELECT d.name AS department_name, SUM(c.amount) AS sum
+FROM department d
+JOIN employees e ON d.id = e.department_id
+JOIN executor ex ON e.id = ex.tab_no
+JOIN contract c ON ex.contract_id = c.id
+GROUP BY d.id, d.name
+ORDER BY sum DESC
+LIMIT 1;
+ 
